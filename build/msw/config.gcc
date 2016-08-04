@@ -72,10 +72,10 @@ USE_GUI ?= 1
 USE_HTML ?= 1
 
 # Build wxWebView library (USE_GUI must be 1)? [0,1]
-USE_WEBVIEW ?= 1
+USE_WEBVIEW ?= 0
 
 # Build multimedia library (USE_GUI must be 1)? [0,1]
-USE_MEDIA ?= 1
+USE_MEDIA ?= 0
 
 # Build wxXRC library (USE_GUI must be 1)? [0,1]
 USE_XRC ?= 1
@@ -84,19 +84,19 @@ USE_XRC ?= 1
 USE_AUI ?= 1
 
 # Build wxRibbon library (USE_GUI must be 1)? [0,1]
-USE_RIBBON ?= 1
+USE_RIBBON ?= 0
 
 # Build wxPropertyGrid library (USE_GUI must be 1)? [0,1]
-USE_PROPGRID ?= 1
+USE_PROPGRID ?= 0
 
 # Build wxRichTextCtrl library (USE_GUI must be 1)? [0,1]
-USE_RICHTEXT ?= 1
+USE_RICHTEXT ?= 0
 
 # Build wxStyledTextCtrl library (USE_GUI must be 1)? [0,1]
-USE_STC ?= 1
+USE_STC ?= 0
 
 # Build OpenGL canvas library (USE_GUI must be 1)? [0,1]
-USE_OPENGL ?= 1
+USE_OPENGL ?= 0
 
 # Build quality assurance classes library (USE_GUI must be 1)? [0,1]
 USE_QA ?= 0
