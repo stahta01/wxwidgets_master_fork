@@ -1929,6 +1929,7 @@ wxIconBundle wxXmlResourceHandlerImpl::GetIconBundle(const wxString& param,
     wxIconBundle bundle(name);
 #endif
 
+#if wxUSE_IMAGE
     if ( !bundle.IsOk() )
     {
         ReportParamError
@@ -1940,6 +1941,9 @@ wxIconBundle wxXmlResourceHandlerImpl::GetIconBundle(const wxString& param,
     }
 
     return bundle;
+#else
+    return wxNullIconBundle;
+#endif // wxUSE_IMAGE
 }
 
 
