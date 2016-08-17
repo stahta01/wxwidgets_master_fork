@@ -94,11 +94,15 @@ float wxAuiGetColourContrast(const wxColour& c1, const wxColour& c2)
 wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], int w, int h,
                              const wxColour& color)
 {
+#if wxUSE_IMAGE
     wxImage img = wxBitmap((const char*)bits, w, h).ConvertToImage();
     img.Replace(0,0,0,123,123,123);
     img.Replace(255,255,255,color.Red(),color.Green(),color.Blue());
     img.SetMaskColour(123,123,123);
     return wxBitmap(img);
+#else
+    return wxBitmap();
+#endif // wxUSE_IMAGE
 }
 
 // A utility function to scales a bitmap in place for use at the given scale
