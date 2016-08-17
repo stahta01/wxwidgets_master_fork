@@ -1847,6 +1847,7 @@ wxBitmap wxXmlResourceHandlerImpl::GetBitmap(const wxXmlNode* node,
     wxImage img(name);
 #endif
 
+#if wxUSE_IMAGE
     if (!img.IsOk())
     {
         ReportParamError
@@ -1858,6 +1859,9 @@ wxBitmap wxXmlResourceHandlerImpl::GetBitmap(const wxXmlNode* node,
     }
     if (!(size == wxDefaultSize)) img.Rescale(size.x, size.y);
     return wxBitmap(img);
+#else
+    return wxNullBitmap;
+#endif // wxUSE_IMAGE
 }
 
 
