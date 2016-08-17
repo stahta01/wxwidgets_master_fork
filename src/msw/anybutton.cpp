@@ -662,10 +662,14 @@ void wxAnyButton::DoSetBitmap(const wxBitmap& bitmap, State which)
             {
                 // Replace the removed bitmap with the normal one.
                 wxBitmap bmpNormal = m_imageData->GetBitmap(State_Normal);
+#if wxUSE_IMAGE
                 m_imageData->SetBitmap(which == State_Disabled
                                             ? bmpNormal.ConvertToDisabled()
                                             : bmpNormal,
                                        which);
+#else
+                m_imageData->SetBitmap(bmpNormal, which);
+#endif
             }
         }
 
