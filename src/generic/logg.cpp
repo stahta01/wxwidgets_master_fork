@@ -710,6 +710,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     wxBoxSizer *sizerTop = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *sizerAll = new wxBoxSizer(isPda ? wxVERTICAL : wxHORIZONTAL);
 
+#if wxUSE_STATBMP
     if (!isPda)
     {
         wxStaticBitmap *icon = new wxStaticBitmap
@@ -720,6 +721,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
                                    );
         sizerAll->Add(icon, wxSizerFlags().Centre());
     }
+#endif // wxUSE_STATBMP
 
     // create the text sizer with a minimal size so that we are sure it won't be too small
     wxString message = EllipsizeString(messages.Last());
