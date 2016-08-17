@@ -1026,7 +1026,11 @@ wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
         // no disabled bitmap specified, we need to make one
         if (item.m_bitmap.IsOk())
         {
+#if wxUSE_IMAGE
             item.m_disabledBitmap = item.m_bitmap.ConvertToDisabled();
+#else
+            item.m_disabledBitmap = item.m_bitmap;
+#endif // wxUSE_IMAGE
         }
     }
     m_items.Add(item);
