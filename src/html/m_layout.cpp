@@ -330,6 +330,7 @@ TAG_HANDLER_BEGIN(BODY, "BODY")
             wxFSFile *fileBgImage = m_WParser->OpenURL(wxHTML_URL_IMAGE, bg);
             if ( fileBgImage )
             {
+#if wxUSE_IMAGE
                 wxInputStream *is = fileBgImage->GetStream();
                 if ( is )
                 {
@@ -337,6 +338,7 @@ TAG_HANDLER_BEGIN(BODY, "BODY")
                     if ( image.IsOk() )
                         winIface->SetHTMLBackgroundImage(image);
                 }
+#endif // wxUSE_IMAGE
 
                 delete fileBgImage;
             }
