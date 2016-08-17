@@ -1839,7 +1839,9 @@ wxBitmap wxXmlResourceHandlerImpl::GetBitmap(const wxXmlNode* node,
         );
         return wxNullBitmap;
     }
+#if wxUSE_IMAGE
     wxImage img(*(fsfile->GetStream()));
+#endif // wxUSE_IMAGE
     delete fsfile;
 #else
     wxImage img(name);
