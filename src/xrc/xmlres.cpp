@@ -1921,7 +1921,9 @@ wxIconBundle wxXmlResourceHandlerImpl::GetIconBundle(const wxString& param,
         return wxNullIconBundle;
     }
 
+#if wxUSE_IMAGE
     wxIconBundle bundle(*(fsfile->GetStream()));
+#endif // wxUSE_IMAGE
     delete fsfile;
 #else
     wxIconBundle bundle(name);
