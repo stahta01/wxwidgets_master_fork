@@ -697,7 +697,7 @@
 // Default is 1.
 //
 // Recommended setting: 1
-#define wxUSE_MEDIACTRL     1
+#define wxUSE_MEDIACTRL     0
 
 // Use wxWidget's XRC XML-based resource system.  Recommended.
 //
@@ -726,28 +726,28 @@
 // Default is 1
 //
 // Recommended setting: 1
-#define wxUSE_RIBBON    1
+#define wxUSE_RIBBON    0
 
 // Use wxPropertyGrid.
 //
 // Default is 1
 //
 // Recommended setting: 1
-#define wxUSE_PROPGRID  1
+#define wxUSE_PROPGRID  0
 
 // Use wxStyledTextCtrl, a wxWidgets implementation of Scintilla.
 //
 // Default is 1
 //
 // Recommended setting: 1
-#define wxUSE_STC 1
+#define wxUSE_STC 0
 
 // Use wxWidget's web viewing classes
 //
 // Default is 1
 //
 // Recommended setting: 1
-#define wxUSE_WEBVIEW 1
+#define wxUSE_WEBVIEW 0
 
 // Use the IE wxWebView backend
 //
@@ -1378,7 +1378,7 @@
 //
 // Recommended setting: 1 if you intend to use OpenGL, can be safely set to 0
 // otherwise.
-#define wxUSE_GLCANVAS       1
+#define wxUSE_GLCANVAS       0
 
 // wxRichTextCtrl allows editing of styled text.
 //
@@ -1386,7 +1386,7 @@
 //
 // Recommended setting: 1, set to 0 if you want compile a
 // smaller library.
-#define wxUSE_RICHTEXT       1
+#define wxUSE_RICHTEXT       0
 
 // ----------------------------------------------------------------------------
 // Data transfer
