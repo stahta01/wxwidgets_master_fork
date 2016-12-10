@@ -21,7 +21,7 @@
 
 // under Windows we prefer to use the native implementation but can be forced
 // to use the file-based one
-#if defined(__WINDOWS__) && wxUSE_CONFIG_NATIVE
+#if defined(__WINDOWS__) && wxUSE_CONFIG_NATIVE && wxUSE_REGKEY
     #include "wx/msw/regconf.h"
     #define wxConfig  wxRegConfig
 #else // either we're under Unix or wish to always use config files
