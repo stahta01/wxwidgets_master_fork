@@ -13,11 +13,11 @@
 // ===========================================================================
 
 // For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+// #include "wx/wxprec.h"
 
-#ifdef __BORLANDC__
-    #pragma hdrstop
-#endif
+// #ifdef __BORLANDC__
+//     #pragma hdrstop
+// #endif
 
 #include "wx/crt.h"
 #include "wx/strconv.h" // wxMBConv::cWC2MB()
@@ -42,12 +42,12 @@
 #include <time.h>
 #include <locale.h>
 
-#ifndef WX_PRECOMP
+// #ifndef WX_PRECOMP
     #include "wx/string.h"
     #include "wx/hash.h"
     #include "wx/utils.h"     // for wxMin and wxMax
     #include "wx/log.h"
-#endif
+// #endif
 
 #ifdef HAVE_LANGINFO_H
     #include <langinfo.h>
