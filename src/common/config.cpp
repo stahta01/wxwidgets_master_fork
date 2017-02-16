@@ -19,7 +19,7 @@
     #pragma hdrstop
 #endif  //__BORLANDC__
 
-#ifndef wxUSE_CONFIG_NATIVE
+#if !defined(wxUSE_CONFIG_NATIVE) && (wxUSE_REGKEY || !defined(__WINDOWS__))
     #define wxUSE_CONFIG_NATIVE 1
 #endif
 

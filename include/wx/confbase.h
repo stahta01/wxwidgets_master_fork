@@ -45,7 +45,7 @@ class WXDLLIMPEXP_FWD_BASE wxArrayString;
 /// should we use registry instead of configuration files under Windows?
 // (i.e. whether wxConfigBase::Create() will create a wxFileConfig (if it's
 //  false) or wxRegConfig (if it's true and we're under Win32))
-#ifndef   wxUSE_CONFIG_NATIVE
+#if !defined(wxUSE_CONFIG_NATIVE) && (wxUSE_REGKEY || !defined(__WINDOWS__))
   #define wxUSE_CONFIG_NATIVE 1
 #endif
 
