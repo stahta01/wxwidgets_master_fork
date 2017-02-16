@@ -436,6 +436,11 @@
     #define wxUSE_STACKWALKER 0
 #endif /* wxUSE_STACKWALKER && !wxUSE_DBGHELP */
 
+#if wxUSE_CONFIG_NATIVE && !wxUSE_REGKEY
+    #undef wxUSE_CONFIG_NATIVE
+    #define wxUSE_CONFIG_NATIVE 0
+#endif /* wxUSE_CONFIG_NATIVE && !wxUSE_REGKEY */
+
 #if !wxUSE_THREADS
 #   if wxUSE_FSWATCHER
 #       ifdef wxABORT_ON_CONFIG_ERROR
