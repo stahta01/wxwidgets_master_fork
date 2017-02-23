@@ -1,0 +1,74 @@
+Building wxGTK port with Win32 GDK backend under MSys2 via makefile.gcc
+-----------------------------------------------------------------------
+
+GTK+ widget toolkit has multiple GDK backends and one of them is Win32.
+It is a wrapper around Windows API.
+
+These notes don't consider building wxGTK with X11 backend under Windows.
+
+These notes are based on docs/msw/gtk.txt with changes needed for MSys2.
+And have NOT been tested with MSys2 64-bit/mingw64 or with GTK version 3.
+
+Building steps:
+
+1. wxGTK/Win32 build is similar to wxMSW one and you should
+have configured and be able to build wxWidgets as described in 
+docs/msw/????.txt
+
+2. wxGTK/Win32 is disabled by default in wxWidgets, you need to enable
+it in bakefiles manually. Apply following patch manually:
+
+    patch -p0 < docs/msw/gtkfix.patch
+    patch -p0 < docs/msw/gtkfix_msys2_mingw32.patch
+
+Regenerate required make/project files:
+    cd build/bakefiles
+    bakefile_gen
+    cd ../..
+
+3. Install additional MSys2 32-bit mingw packages needed to build 
+wxGTK/Win32.
+
+pacman -S 
+
+4. Building wxGTK/Win32 from MSys2 mingw32 propmt
+
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/include/gtk-2.0")"
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/include/glib-2.0")"
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/include/cairo")"
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/include/pango-1.0")"
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/include/gdk-pixbuf-2.0")"
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/include/atk-1.0")"
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/lib/glib-2.0/include")"
+export CXXFLAGS="$CXXFLAGS -I$(cygpath -am "/mingw32/lib/gtk-2.0/include")"
+export CFLAGS=$CXXFLAGS
+
+cd build/msw
+mingw32-make -f makefile.gcc TOOLKIT=GTK TOOLKIT_VERSION=2
+cd ../..
+
+5. Building and running minimal sample
+5a. Building minimal sample from MSys2 mingw32 propmt
+
+mkdir -p /tmp/gtkwinlibs
+cp /mingw32/lib/libgtk-win32-2.0.dll.a /tmp/gtkwinlibs/gtk-win32-2.0.dll.a
+
+
+ls /mingw32/lib/libgtk-win32-2.0.dll.a
+
+    set LDFLAGS=%LDFLAGS% -LC:\gtk\lib
+    set PATH=C:\gtk\bin\;%PATH%;
+
+
+$ pkg-config --libs gtk+-2.0
+-LC:/msys32/mingw32/lib -lgtk-win32-2.0 -lgdk-win32-2.0 -lgdi32 -limm32 -lshell32 -lole32 -Wl,-luuid -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl
+
+cd samples/minimal
+
+export LDFLAGS="-L$(cygpath -m "/tmp/gtkwinlibs") -L$(cygpath -am "/tmp/gtkwinlibs") -L$(cygpath -au "/tmp/gtkwinlibs")  -L$(cygpath -aw "/tmp/gtkwinlibs")"
+
+mingw32-make -f makefile.gcc TOOLKIT=GTK TOOLKIT_VERSION=2
+
+5b. Running minimal sample from MSys2 mingw32 propmt
+
+./gcc_gtk2ud/minimal.exe
