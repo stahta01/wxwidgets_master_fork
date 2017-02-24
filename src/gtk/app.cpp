@@ -418,7 +418,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
         return false;
     }
 
-#if wxUSE_MIMETYPE
+#if wxUSE_MIMETYPE && !defined(__WINDOWS__)
     wxMimeTypesManagerFactory::Set(new wxGTKMimeTypesManagerFactory());
 #endif
 
