@@ -1,0 +1,11 @@
+--- build/bakefiles/config.bkl
++++ build/bakefiles/config.bkl
+@@ -64,7 +64,7 @@
+         </if>
+ 
+         <!-- We must make TOOLKIT a constant under Windows -->
+-        <if cond="FORMAT in ['borland','mingw','msvc','watcom', 'msvc6prj', 'msvs2003prj', 'msvs2005prj', 'msvs2008prj']">
++        <if cond="FORMAT in ['borland','msvc','watcom', 'msvc6prj', 'msvs2003prj', 'msvs2005prj', 'msvs2008prj']">
+             <set var="TOOLKIT">MSW</set>
+         </if>
+     </if>
