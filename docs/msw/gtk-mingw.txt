@@ -1,0 +1,72 @@
+Building wxGTK port with Win32 GDK backend
+------------------------------------------
+
+GTK+ widget toolkit has multiple GDK backends and one of them is Win32.
+It is a wrapper around Windows API.
+
+See https://www.gtk.org/download/windows.php
+
+These notes don't consider building wxGTK with X11 backend under Windows.
+
+Building steps:
+
+1. wxGTK/Win32 build is similar to wxMSW one and you should have configured
+and be able to build wxWidgets as described in docs/msw/install.txt
+
+2. wxGTK/Win32 is disabled by default in wxWidgets, you need to enable it
+in bakefiles manually. Apply following patch manually or using Cygwin:
+
+    patch -p0 < docs/msw/gtkfix-mingw_only.patch
+
+Regenerate required make/project files:
+    cd build/bakefiles
+    bakefile_gen
+    cd ../..
+
+3. Download GTK+ for Windows and uncompress files in the directory
+without spaces in the name. We suppose later that GTK+/Win32 is
+in the C:\gtk directory.
+
+    http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.24/gtk+-bundle_2.24.10-20120208_win32.zip
+
+4. Building with MinGW
+
+    set PATH=%SystemRoot%\system32;%SystemRoot%
+    set PATH=C:\Apps32\MingwGCC510TDMmgw32\bin;%PATH%
+    set PATH=C:\gtk\bin\;%PATH%;
+
+    set CFLAGS=-IC:\gtk\include\gtk-2.0
+    set CFLAGS=%CFLAGS% -IC:\gtk\include\glib-2.0
+    set CFLAGS=%CFLAGS% -IC:\gtk\include\cairo
+    set CFLAGS=%CFLAGS% -IC:\gtk\include\pango-1.0
+    set CFLAGS=%CFLAGS% -IC:\gtk\include\gdk-pixbuf-2.0
+    set CFLAGS=%CFLAGS% -IC:\gtk\include\atk-1.0
+    set CFLAGS=%CFLAGS% -IC:\gtk\lib\glib-2.0\include
+    set CFLAGS=%CFLAGS% -IC:\gtk\lib\gtk-2.0\include
+
+    set CXXFLAGS=%CFLAGS%
+    set LDFLAGS=-LC:\gtk\lib
+
+    cd build/msw
+
+    mingw32-make -f makefile.gcc TOOLKIT=GTK TOOLKIT_VERSION=2
+
+    cd ../..
+
+cd samples/minimal
+
+mingw32-make -f makefile.gcc TOOLKIT=GTK TOOLKIT_VERSION=2
+
+g++: error: gtk-win32-2.0.lib: No such file or directory
+g++: error: gdk-win32-2.0.lib: No such file or directory
+g++: error: gio-2.0.lib: No such file or directory
+g++: error: pangocairo-1.0.lib: No such file or directory
+g++: error: gdk_pixbuf-2.0.lib: No such file or directory
+g++: error: cairo.lib: No such file or directory
+g++: error: pango-1.0.lib: No such file or directory
+g++: error: gobject-2.0.lib: No such file or directory
+g++: error: gthread-2.0.lib: No such file or directory
+g++: error: glib-2.0.lib: No such file or directory
+makefile.gcc:248: recipe for target 'gcc_gtk2ud\minimal.exe' failed
+
+5. Now you can use wxGTK/Win32 as wxMSW in your applications.
