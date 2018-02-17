@@ -5150,7 +5150,7 @@ ifeq ($(USE_THREADS),0)
 __THREADSFLAG = 
 endif
 ifeq ($(USE_THREADS),1)
-__THREADSFLAG = -mthreads
+__THREADSFLAG = 
 endif
 ifeq ($(USE_RTTI),0)
 __RTTIFLAG = -fno-rtti
