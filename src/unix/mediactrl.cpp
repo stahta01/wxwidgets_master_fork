@@ -35,7 +35,9 @@
 
 #ifdef __WXGTK__
     #include "wx/gtk/private/wrapgtk.h"
-    #include <gdk/gdkx.h>
+    #ifdef GDK_WINDOWING_X11
+        #include <gdk/gdkx.h>
+    #endif
 #endif
 
 //-----------------------------------------------------------------------------
