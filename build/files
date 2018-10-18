@@ -211,7 +211,6 @@ QT_WIN32_HDR=
     wx/msw/sound.h
 
 QT_HDR =
-    $(QT_PLATFORM_HDR)
     wx/generic/activityindicator.h
     wx/generic/animate.h
     wx/generic/caret.h
@@ -300,7 +299,6 @@ QT_HDR =
     wx/qt/window.h
 
 QT_SRC=
-    $(QT_PLATFORM_SRC)
     src/common/taskbarcmn.cpp
     src/generic/activityindicator.cpp
     src/generic/animateg.cpp
