@@ -99,6 +99,8 @@ public:
     wxIMPLEMENT_DYNAMIC_CLASS(wxWindow, wxWindowDFB);
 #elif defined(__WXX11__)
     wxIMPLEMENT_DYNAMIC_CLASS(wxWindow, wxWindowX11);
+#elif defined(__WXQT__)
+    wxIMPLEMENT_DYNAMIC_CLASS(wxWindow, wxWindowQt);
 #endif
 
 wxBEGIN_EVENT_TABLE(wxWindow, wxWindowNative)
