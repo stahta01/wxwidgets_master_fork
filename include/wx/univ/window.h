@@ -47,6 +47,8 @@ class WXDLLIMPEXP_FWD_CORE wxRenderer;
 #define wxWindowNative wxWindowX11
 #elif defined(__WXMAC__)
 #define wxWindowNative wxWindowMac
+#elif defined(__WXQT__)
+#define wxWindowNative wxWindowQt
 #endif
 
 class WXDLLIMPEXP_CORE wxWindow : public wxWindowNative
