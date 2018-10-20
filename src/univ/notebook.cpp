@@ -73,6 +73,7 @@ protected:
 // private classes
 // ----------------------------------------------------------------------------
 
+#if wxUSE_SPINBTN
 class wxNotebookSpinBtn : public wxSpinButton
 {
 public:
@@ -99,6 +100,7 @@ private:
 wxBEGIN_EVENT_TABLE(wxNotebookSpinBtn, wxSpinButton)
     EVT_SPIN(wxID_ANY, wxNotebookSpinBtn::OnSpin)
 wxEND_EVENT_TABLE()
+#endif // wxUSE_SPINBTN
 
 // ============================================================================
 // implementation
@@ -119,7 +121,9 @@ void wxNotebook::Init()
 
     m_offset = 0;
 
+#if wxUSE_SPINBTN
     m_spinbtn = NULL;
+#endif // wxUSE_SPINBTN
 }
 
 bool wxNotebook::Create(wxWindow *parent,
@@ -254,11 +258,13 @@ int wxNotebook::DoSetSelection(size_t nPage, int flags)
 
     if ( m_selection != wxNOT_FOUND ) // this is impossible - but test nevertheless
     {
+#if wxUSE_SPINBTN
         if ( HasSpinBtn() )
         {
             // keep it in sync
             m_spinbtn->SetValue(m_selection);
         }
+#endif // wxUSE_SPINBTN
 
         if ( nPage < m_firstVisible )
         {
@@ -520,7 +526,11 @@ void wxNotebook::DoDraw(wxControlRenderer *renderer)
     if ( HasSpinBtn() )
     {
         wxRect rectTabs = GetAllTabsRect();
+#if wxUSE_SPINBTN
         wxSize sizeSpinBtn = m_spinbtn->GetSize();
+#else
+        wxSize sizeSpinBtn = wxSize(8, 8);
+#endif // wxUSE_SPINBTN
 
         if ( IsVertical() )
         {
@@ -997,7 +1007,11 @@ wxSize wxNotebook::CalcSizeFromPage(const wxSize& sizePage) const
 
 bool wxNotebook::HasSpinBtn() const
 {
+#if wxUSE_SPINBTN
     return m_spinbtn && m_spinbtn->IsShown();
+#else
+    return false;
+#endif // wxUSE_SPINBTN
 }
 
 void wxNotebook::CalcLastVisibleTab()
@@ -1040,6 +1054,7 @@ void wxNotebook::CalcLastVisibleTab()
     {
         m_lastFullyVisible = n - 1;
 
+#if wxUSE_SPINBTN
         // but is it really fully visible? it shouldn't overlap with the spin
         // button if it is present (again, even if the first button does
         // overlap with it, we pretend that it doesn't as there is not much
@@ -1060,6 +1075,7 @@ void wxNotebook::CalcLastVisibleTab()
                 m_lastFullyVisible--;
             }
         }
+#endif // wxUSE_SPINBTN
     }
 
     if ( n == count )
@@ -1076,6 +1092,7 @@ void wxNotebook::CalcLastVisibleTab()
     }
 }
 
+#if wxUSE_SPINBTN
 void wxNotebook::UpdateSpinBtn()
 {
     // first decide if we need a spin button
@@ -1189,6 +1206,10 @@ void wxNotebook::PositionSpinBtn()
 
     m_spinbtn->Move(x, y);
 }
+#else
+    void wxNotebook::UpdateSpinBtn(){;}
+    void wxNotebook::PositionSpinBtn(){;}
+#endif // wxUSE_SPINBTN
 
 // ----------------------------------------------------------------------------
 // wxNotebook scrolling
@@ -1222,6 +1243,7 @@ void wxNotebook::ScrollLastTo(size_t page)
     wxCoord widthAll = IsVertical() ? size.y : size.x,
             widthTabs = GetTabWidth(page);
 
+#if wxUSE_SPINBTN
     // the total width is less than the width of the window if we have the spin
     // button
     if ( HasSpinBtn() )
@@ -1232,6 +1254,7 @@ void wxNotebook::ScrollLastTo(size_t page)
         else
             widthAll -= sizeSpinBtn.x;
     }
+#endif // wxUSE_SPINBTN
 
     m_firstVisible = page;
     while ( (m_firstVisible > 0) && (widthTabs <= widthAll) )
@@ -1418,3 +1441,4 @@ void wxStdNotebookInputHandler::HandleFocusChange(wxInputConsumer *consumer)
 }
 
 #endif // wxUSE_NOTEBOOK
+
