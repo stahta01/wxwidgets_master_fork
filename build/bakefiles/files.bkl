@@ -2741,6 +2741,9 @@ IMPORTANT: please read docs/tech/tn0016.txt before modifying this file!
 </set>
 
 <set var="UNIV_PLATFORM_SRC" hints="files">
+    <if cond="TOOLKIT=='QT' and PLATFORM_WIN32=='1'">
+        src/qt/apptraits.cpp
+    </if>
 <!--
     Including src/generic/animateg.cpp hre unconditionally results in bakefile
     errors when not fixing the value of TOOLKIT to MSW in msvc format, see #15327.
