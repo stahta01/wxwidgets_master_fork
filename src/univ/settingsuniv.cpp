@@ -100,10 +100,12 @@ int wxSystemSettings::GetMetric(wxSystemMetric index, const wxWindow* win)
 {
     switch ( index )
     {
+#if wxUSE_SCROLLBAR
         case wxSYS_VSCROLL_X:
             return wxTheme::Get()->GetRenderer()->GetScrollbarArrowSize().x;
         case wxSYS_HSCROLL_Y:
             return wxTheme::Get()->GetRenderer()->GetScrollbarArrowSize().y;
+#endif // wxUSE_SCROLLBAR
 
         default:
             return wxSystemSettingsNative::GetMetric(index, win);
