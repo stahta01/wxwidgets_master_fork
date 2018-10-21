@@ -189,7 +189,11 @@ wxSize wxSpinButton::DoGetBestClientSize() const
 {
     // a spin button has by default the same size as two scrollbar arrows put
     // together
+#if wxUSE_SCROLLBAR
     wxSize size = m_renderer->GetScrollbarArrowSize();
+#else
+    wxSize size = wxSize(8, 8);
+#endif // wxUSE_SCROLLBAR
     if ( IsVertical() )
     {
         size.y *= 2;
