@@ -61,15 +61,6 @@
 #            define wxUSE_CARET 1
 #        endif
 #    endif /* wxUSE_CARET */
-
-#    if !wxUSE_SCROLLBAR
-#        ifdef wxABORT_ON_CONFIG_ERROR
-#            error "wxTextCtrl requires wxScrollBar in wxUniversal"
-#        else
-#            undef wxUSE_SCROLLBAR
-#            define wxUSE_SCROLLBAR 1
-#        endif
-#    endif /* wxUSE_SCROLLBAR */
 #endif /* wxUSE_TEXTCTRL */
 
 

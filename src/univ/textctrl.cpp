@@ -252,6 +252,7 @@ struct wxTextMultiLineData
     // the lines of text
     wxArrayString m_lines;
 
+#if wxUSE_SCROLLBAR
     // the current ranges of the scrollbars
     int m_scrollRangeX,
         m_scrollRangeY;
@@ -259,6 +260,7 @@ struct wxTextMultiLineData
     // should we adjust the horz/vert scrollbar?
     bool m_updateScrollbarX,
          m_updateScrollbarY;
+#endif // wxUSE_SCROLLBAR
 
     // the max line length in pixels
     wxCoord m_widthMax;
@@ -282,11 +284,13 @@ struct wxTextMultiLineData
     // the def ctor
     wxTextMultiLineData()
     {
+#if wxUSE_SCROLLBAR
         m_scrollRangeX =
         m_scrollRangeY = 0;
 
         m_updateScrollbarX =
         m_updateScrollbarY = false;
+#endif // wxUSE_SCROLLBAR
 
         m_widthMax = -1;
         m_lineLongest = 0;
@@ -1239,8 +1243,10 @@ void wxTextCtrl::Replace(wxTextPos from, wxTextPos to, const wxString& text)
             // refresh text rect left below
             RefreshLineRange(lineEnd + 1, 0);
 
+#if wxUSE_SCROLLBAR
             // the vert scrollbar might [dis]appear
             MData().m_updateScrollbarY = true;
+#endif // wxUSE_SCROLLBAR
         }
 
         // must recalculate it - will do later
@@ -1942,6 +1948,7 @@ void wxTextCtrl::ShowPosition(wxTextPos pos)
     {
         ShowHorzPosition(GetTextWidth(m_value.Left(pos)));
     }
+#if wxUSE_SCROLLBAR
     else if ( MData().m_scrollRangeX || MData().m_scrollRangeY ) // multiline with scrollbars
     {
         int xStart, yStart;
@@ -2055,6 +2062,7 @@ void wxTextCtrl::ShowPosition(wxTextPos pos)
         }
     }
     //else: multiline but no scrollbars, hence nothing to do
+#endif // wxUSE_SCROLLBAR
 
     if (showCaret)
         ShowCaret();
@@ -2536,8 +2544,10 @@ void wxTextCtrl::OnSize(wxSizeEvent& event)
         UpdateScrollbars();
 #endif // 0
 
+#if wxUSE_SCROLLBAR
         MData().m_updateScrollbarX =
         MData().m_updateScrollbarY = true;
+#endif // wxUSE_SCROLLBAR
     }
 
     event.Skip();
@@ -3542,7 +3552,9 @@ void wxTextCtrl::UpdateMaxWidth(wxTextCoord line)
         }
     }
 
+#if wxUSE_SCROLLBAR
     MData().m_updateScrollbarX = MData().m_widthMax != widthMaxOld;
+#endif // wxUSE_SCROLLBAR
 }
 
 void wxTextCtrl::RecalcFontMetrics()
@@ -3592,6 +3604,7 @@ wxCoord wxTextCtrl::GetMaxWidth() const
     return MData().m_widthMax;
 }
 
+#if wxUSE_SCROLLBAR
 void wxTextCtrl::UpdateScrollbars()
 {
     wxASSERT_MSG( !IsSingleLine(), wxT("only used for multiline") );
@@ -3677,15 +3690,18 @@ void wxTextCtrl::UpdateScrollbars()
     MData().m_updateScrollbarX =
     MData().m_updateScrollbarY = false;
 }
+#endif // wxUSE_SCROLLBAR
 
 void wxTextCtrl::OnInternalIdle()
 {
+#if wxUSE_SCROLLBAR
     // notice that single line text control never has scrollbars
     if ( !IsSingleLine() &&
             (MData().m_updateScrollbarX || MData().m_updateScrollbarY) )
     {
         UpdateScrollbars();
     }
+#endif // wxUSE_SCROLLBAR
     wxControl::OnInternalIdle();
 }
 
@@ -4315,7 +4331,9 @@ bool wxTextCtrl::SetFont(const wxFont& font)
     RecalcFontMetrics();
     if ( !IsSingleLine() )
     {
+#if wxUSE_SCROLLBAR
         UpdateScrollbars();
+#endif // wxUSE_SCROLLBAR
         RecalcMaxWidth();
     }
 

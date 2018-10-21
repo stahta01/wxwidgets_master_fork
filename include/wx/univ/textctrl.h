@@ -454,8 +454,10 @@ protected:
 private:
     // all these methods are for multiline text controls only
 
+#if wxUSE_SCROLLBAR
     // update the scrollbars (only called from OnIdle)
     void UpdateScrollbars();
+#endif //wxUSE_SCROLLBAR
 
     // get read only access to the lines of multiline control
     inline const wxArrayString& GetLines() const;
