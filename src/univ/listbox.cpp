@@ -122,11 +122,13 @@ void wxListBox::Init()
     // no need to update anything initially
     m_updateCount = 0;
 
+#if wxUSE_SCROLLBAR
     // no scrollbars to show nor update
     m_updateScrollbarX =
     m_showScrollbarX =
     m_updateScrollbarY =
     m_showScrollbarY = false;
+#endif // wxUSE_SCROLLBAR
     m_inputHandlerType = wxINP_HANDLER_LISTBOX;
 }
 
@@ -264,6 +266,7 @@ int wxListBox::DoInsertItems(const wxArrayStringsAdapter& items,
         OnItemInserted(idx);
     }
 
+#if wxUSE_SCROLLBAR
     // the number of items has changed so we might have to show the scrollbar
     m_updateScrollbarY = true;
 
@@ -271,6 +274,7 @@ int wxListBox::DoInsertItems(const wxArrayStringsAdapter& items,
     // keeping track of it here, this is probably more efficient for a typical
     // use pattern
     RefreshHorzScrollbar();
+#endif // wxUSE_SCROLLBAR
 
     // note that we have to refresh all the items after the ones we inserted,
     // not just these items
@@ -288,6 +292,7 @@ void wxListBox::SetString(unsigned int n, const wxString& s)
     else
         (*m_strings.unsorted)[n] = s;
 
+#if wxUSE_SCROLLBAR
     if ( HasHorzScrollbar() )
     {
         // we need to update m_maxWidth as changing the string may cause the
@@ -309,6 +314,7 @@ void wxListBox::SetString(unsigned int n, const wxString& s)
             RefreshHorzScrollbar();
         }
     }
+#endif // wxUSE_SCROLLBAR
 
     RefreshItem(n);
 }
@@ -329,9 +335,11 @@ void wxListBox::DoClear()
 
     m_current = -1;
 
+#if wxUSE_SCROLLBAR
     m_updateScrollbarY = true;
 
     RefreshHorzScrollbar();
+#endif // wxUSE_SCROLLBAR
 
     RefreshAll();
 }
@@ -387,6 +395,7 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
         m_selections.RemoveAt(index);
     }
 
+#if wxUSE_SCROLLBAR
     // the number of items has changed, hence the scrollbar may disappear
     m_updateScrollbarY = true;
 
@@ -395,6 +404,7 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
     {
         RefreshHorzScrollbar();
     }
+#endif // wxUSE_SCROLLBAR
 }
 
 // ----------------------------------------------------------------------------
@@ -569,6 +579,7 @@ void wxListBox::RefreshAll()
     m_updateCount = -1;
 }
 
+#if wxUSE_SCROLLBAR
 void wxListBox::RefreshHorzScrollbar()
 {
     m_maxWidth = 0; // recalculate it
@@ -628,6 +639,7 @@ void wxListBox::UpdateScrollbars()
         m_scrollRangeY = scrollRangeY;
     }
 }
+#endif // wxUSE_SCROLLBAR
 
 void wxListBox::UpdateItems()
 {
@@ -662,6 +674,7 @@ void wxListBox::UpdateItems()
 
 void wxListBox::OnInternalIdle()
 {
+#if wxUSE_SCROLLBAR
     if ( m_updateScrollbarY || m_updateScrollbarX )
     {
         UpdateScrollbars();
@@ -669,10 +682,13 @@ void wxListBox::OnInternalIdle()
         m_updateScrollbarX =
         m_updateScrollbarY = false;
     }
+#endif // wxUSE_SCROLLBAR
 
     if ( m_currentChanged )
     {
+#if wxUSE_SCROLLBAR
         DoEnsureVisible(m_current);
+#endif // wxUSE_SCROLLBAR
 
         m_currentChanged = false;
     }
@@ -802,9 +818,11 @@ void wxListBox::OnSize(wxSizeEvent& event)
     // recalculate the number of items per page
     CalcItemsPerPage();
 
+#if wxUSE_SCROLLBAR
     // the scrollbars might [dis]appear
     m_updateScrollbarX =
     m_updateScrollbarY = true;
+#endif // wxUSE_SCROLLBAR
 
     event.Skip();
 }
@@ -974,6 +992,7 @@ bool wxListBox::FindItem(const wxString& prefix, bool strictlyAfter)
 
 void wxListBox::EnsureVisible(int n)
 {
+#if wxUSE_SCROLLBAR
     if ( m_updateScrollbarY )
     {
         UpdateScrollbars();
@@ -983,8 +1002,10 @@ void wxListBox::EnsureVisible(int n)
     }
 
     DoEnsureVisible(n);
+#endif // wxUSE_SCROLLBAR
 }
 
+#if wxUSE_SCROLLBAR
 void wxListBox::DoEnsureVisible(int n)
 {
     if ( !m_showScrollbarY )
@@ -1012,6 +1033,7 @@ void wxListBox::DoEnsureVisible(int n)
         }
     }
 }
+#endif // wxUSE_SCROLLBAR
 
 void wxListBox::ChangeCurrent(int diff)
 {

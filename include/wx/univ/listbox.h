@@ -233,6 +233,7 @@ protected:
     virtual void DoDrawRange(wxControlRenderer *renderer,
                              int itemFirst, int itemLast);
 
+#if wxUSE_SCROLLBAR
     // update the scrollbars and then ensure that the item is visible
     void DoEnsureVisible(int n);
 
@@ -241,6 +242,7 @@ protected:
 
     // update (show/hide/adjust) the scrollbars
     void UpdateScrollbars();
+#endif // wxUSE_SCROLLBAR
 
     // refresh the items specified by m_updateCount and m_updateFrom
     void UpdateItems();
@@ -289,10 +291,12 @@ private:
     // the number of items per page
     size_t m_itemsPerPage;
 
+#if wxUSE_SCROLLBAR
     // if the number of items has changed we may need to show/hide the
     // scrollbar
     bool m_updateScrollbarX, m_updateScrollbarY,
          m_showScrollbarX, m_showScrollbarY;
+#endif // wxUSE_SCROLLBAR
 
     // if the current item has changed, we might need to scroll if it went out
     // of the window
