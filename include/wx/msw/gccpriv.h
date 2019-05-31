@@ -65,6 +65,14 @@
         #endif
     #endif
 
+    #ifdef __MINGW64_TOOLCHAIN__
+        #define wxCHECK_MINGW64_VERSION( major, minor ) \
+ ( ( ( __MINGW64_VERSION_MAJOR > (major) ) \
+      || ( __MINGW64_VERSION_MAJOR == (major) && __MINGW64_VERSION_MINOR >= (minor) ) ) )
+    #else
+        #define wxCHECK_MINGW64_VERSION( major, minor ) (0)
+    #endif
+
     #define wxCHECK_MINGW32_VERSION( major, minor ) \
  ( ( ( __MINGW32_MAJOR_VERSION > (major) ) \
       || ( __MINGW32_MAJOR_VERSION == (major) && __MINGW32_MINOR_VERSION >= (minor) ) ) )

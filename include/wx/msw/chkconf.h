@@ -190,6 +190,13 @@
     #define wxUSE_SECRETSTORE 0
 #endif
 
+#if defined(__MINGW32__) && wxUSE_GRAPHICS_DIRECT2D
+    #if (!wxCHECK_MINGW64_VERSION(7, 0) && !wxCHECK_MINGW32_VERSION(7, 0))
+        #undef wxUSE_GRAPHICS_DIRECT2D
+        #define wxUSE_GRAPHICS_DIRECT2D 0
+    #endif
+#endif
+
 #if wxUSE_SPINCTRL
 #   if !wxUSE_SPINBTN
 #       ifdef wxABORT_ON_CONFIG_ERROR
