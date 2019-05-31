@@ -668,7 +668,7 @@
 
 #define wxUSE_GRAPHICS_GDIPLUS wxUSE_GRAPHICS_CONTEXT
 
-#if defined(_MSC_VER) && _MSC_VER >= 1600
+#if defined(_MSC_VER) && _MSC_VER >= 1600 || ( defined(__MINGW32__) && defined(__WXMSW__) )
     #define wxUSE_GRAPHICS_DIRECT2D wxUSE_GRAPHICS_CONTEXT
 #else
     #cmakedefine01 wxUSE_GRAPHICS_DIRECT2D
