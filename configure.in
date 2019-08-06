@@ -1379,7 +1379,49 @@ dnl ------------------------------------------------------------------------
 dnl Platform specific tests
 dnl ------------------------------------------------------------------------
 
-if test "$USE_LINUX" = 1 -o "$USE_GNU" = 1; then
+dnl Determine whether we want to use Cygwin as Windows or POSIX platform: the
+dnl latter makes more sense for wxGTK/Motif/X11 ports
+wants_win32=0
+doesnt_want_win32=0
+case "${host}" in
+  *-*-cygwin*)
+      if test "$wxUSE_MSW" = 1 ; then
+        wants_win32=1
+      else
+        dnl when we use cygwin compiler with -mno-cygwin option it uses mingw32
+        dnl headers and libraries, so it's Windows-like in this case
+        AC_CACHE_CHECK([if -mno-cygwin is in effect], wx_cv_nocygwin,
+            [
+                AC_TRY_COMPILE(
+                    [],
+                    [
+                        #ifdef __MINGW32__
+                            choke me
+                        #endif
+                    ],
+                    wx_cv_nocygwin=no,
+                    wx_cv_nocygwin=yes
+                )
+            ]
+        )
+
+        if test "$wx_cv_nocygwin" = "yes"; then
+            wants_win32=1
+        else
+            doesnt_want_win32=1
+        fi
+      fi
+      if test "$wants_win32" = 1 ; then
+        BAKEFILE_FORCE_PLATFORM=win32
+      fi
+  ;;
+  *-*-mingw*)
+      wants_win32=1
+  ;;
+esac
+dnl (end of Windows-only piece)
+
+if test "$USE_LINUX" = 1 -o "$USE_GNU" = 1 -o "$doesnt_want_win32" = 1; then
     dnl While g++ predefines _GNU_SOURCE by default, gcc does not, so do it
     dnl explicitly to ensure that the tests done below using C compiler
     dnl succeed, otherwise things like pthread_mutexattr_settype() (and many
@@ -1447,47 +1489,7 @@ case "${host}" in
   ;;
 esac
 
-dnl Determine whether we want to use Cygwin as Windows or POSIX platform: the
-dnl latter makes more sense for wxGTK/Motif/X11 ports
-wants_win32=0
-doesnt_want_win32=0
-case "${host}" in
-  *-*-cygwin*)
-      if test "$wxUSE_MSW" = 1 ; then
-        wants_win32=1
-      else
-        dnl when we use cygwin compiler with -mno-cygwin option it uses mingw32
-        dnl headers and libraries, so it's Windows-like in this case
-        AC_CACHE_CHECK([if -mno-cygwin is in effect], wx_cv_nocygwin,
-            [
-                AC_TRY_COMPILE(
-                    [],
-                    [
-                        #ifdef __MINGW32__
-                            choke me
-                        #endif
-                    ],
-                    wx_cv_nocygwin=no,
-                    wx_cv_nocygwin=yes
-                )
-            ]
-        )
-
-        if test "$wx_cv_nocygwin" = "yes"; then
-            wants_win32=1
-        else
-            doesnt_want_win32=1
-        fi
-      fi
-      if test "$wants_win32" = 1 ; then
-        BAKEFILE_FORCE_PLATFORM=win32
-      fi
-  ;;
-  *-*-mingw*)
-      wants_win32=1
-  ;;
-esac
-
+dnl (start of Windows-only piece)
 if test "$wxUSE_WINE" = "yes"; then
     wants_win32=1
     LDFLAGS_GUI="-mwindows"
