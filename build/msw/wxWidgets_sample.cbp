@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="wxWidgets_sample" />
+		<Option makefile="makefile.gcc" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<MakeCommands>
+			<Build command="" />
+			<CompileFile command="" />
+			<Clean command="" />
+			<DistClean command="$make -f $makefile distclean$target" />
+			<AskRebuildNeeded command="" />
+			<SilentBuild command=" &gt; $(CMD_NULL)" />
+		</MakeCommands>
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/wxWidgets_library" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<MakeCommands>
+					<Build command="$make -f $makefile SHARED=0 UNICODE=1 USE_OPENGL=1 samples" />
+					<CompileFile command="$make -f $makefile SHARED=0 UNICODE=1 USE_OPENGL=1 $file" />
+					<Clean command="$make -f $makefile -C ..\..\samples SHARED=0 UNICODE=1 USE_OPENGL=1 clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile SHARED=0 UNICODE=1 USE_OPENGL=1 samples" />
+					<SilentBuild command="$make -f $makefile SHARED=0 UNICODE=1 USE_OPENGL=1 samples &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/wxWidgets_library" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="$make -f $makefile BUILD=release SHARED=0 UNICODE=1 USE_OPENGL=1 samples" />
+					<CompileFile command="$make -f $makefile BUILD=release SHARED=0 UNICODE=1 USE_OPENGL=1 $file" />
+					<Clean command="$make -f $makefile -C ..\..\samples BUILD=release SHARED=0 UNICODE=1 USE_OPENGL=1 clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile BUILD=release SHARED=0 UNICODE=1 USE_OPENGL=1 samples" />
+					<SilentBuild command="$make -f $makefile BUILD=release SHARED=0 UNICODE=1 USE_OPENGL=1 samples &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="DLL Release">
+				<Option output="bin/Release/wxWidgets_library" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="$make -f $makefile BUILD=release SHARED=1 UNICODE=1 USE_OPENGL=1 samples" />
+					<CompileFile command="$make -f $makefile BUILD=release SHARED=1 UNICODE=1 USE_OPENGL=1 $file" />
+					<Clean command="$make -f $makefile -C ../../samples BUILD=release SHARED=1 UNICODE=1 USE_OPENGL=1 clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile BUILD=release SHARED=1 UNICODE=1 USE_OPENGL=1 samples" />
+					<SilentBuild command="$make -f $makefile BUILD=release SHARED=1 UNICODE=1 USE_OPENGL=1 samples &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="DLL Debug">
+				<Option output="bin/Debug/wxWidgets_library" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<MakeCommands>
+					<Build command="$make -f $makefile SHARED=1 UNICODE=1 USE_OPENGL=1 samples" />
+					<CompileFile command="$make -f $makefile SHARED=1 UNICODE=1 USE_OPENGL=1 $file" />
+					<Clean command="$make -f $makefile -C ..\..\samples SHARED=1 UNICODE=1 USE_OPENGL=1 clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile SHARED=1 UNICODE=1 USE_OPENGL=1 samples" />
+					<SilentBuild command="$make -f $makefile SHARED=1 UNICODE=1 USE_OPENGL=1 samples &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="All" targets="Debug;Release;DLL Release;DLL Debug;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../../include/wx/event.h" />
+		<Unit filename="../../samples/console/console.cpp" />
+		<Unit filename="../../samples/except/except.cpp" />
+		<Unit filename="../../samples/minimal/minimal.cpp" />
+		<Unit filename="../../samples/sockets/baseclient.cpp" />
+		<Unit filename="../../samples/sockets/baseserver.cpp" />
+		<Unit filename="../../samples/sockets/client.cpp" />
+		<Unit filename="../../samples/sockets/server.cpp" />
+		<Unit filename="config.gcc" />
+		<Unit filename="makefile.gcc" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
