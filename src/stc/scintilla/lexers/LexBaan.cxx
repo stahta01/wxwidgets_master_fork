@@ -7,6 +7,7 @@
 // The License.txt file describes the conditions under which this software may be distributed.
 
 // C standard library
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 

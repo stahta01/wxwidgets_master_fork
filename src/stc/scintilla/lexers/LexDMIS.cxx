@@ -12,6 +12,13 @@
 #include <cstring>
 #include <cctype>
 
+using std::memset;
+using std::strcat;
+using std::strcmp;
+using std::strlen;
+using std::strncpy;
+using std::toupper;
+
 #include "ILexer.h"
 #include "Scintilla.h"
 #include "SciLexer.h"

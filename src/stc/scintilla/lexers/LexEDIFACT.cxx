@@ -12,6 +12,9 @@
 #include <cstring>
 #include <cctype>
 
+using std::memcmp;
+using std::strcmp;
+
 #include "ILexer.h"
 #include "Scintilla.h"
 #include "SciLexer.h"

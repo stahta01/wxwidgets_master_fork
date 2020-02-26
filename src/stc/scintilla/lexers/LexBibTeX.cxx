@@ -8,6 +8,7 @@
  * @date April 18, 2009
  */
 
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 

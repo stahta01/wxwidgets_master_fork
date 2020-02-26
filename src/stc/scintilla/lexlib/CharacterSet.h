@@ -8,6 +8,10 @@
 #ifndef CHARACTERSET_H
 #define CHARACTERSET_H
 
+#ifdef __BORLANDC__
+#include <_stddef.h>
+#endif
+
 #ifdef SCI_NAMESPACE
 namespace Scintilla {
 #endif
