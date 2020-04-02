@@ -800,7 +800,7 @@ void TextCtrlTestCase::DoPositionToXYMultiLine(long style)
     // empty field
     m_text->Clear();
     const long numChars_0 = 0;
-    wxASSERT(numChars_0 == text.Length());
+    wxASSERT(numChars_0 == text.length());
     XYPos coords_0[numChars_0+1] =
         { { 0, 0 } };
 
@@ -820,7 +820,7 @@ void TextCtrlTestCase::DoPositionToXYMultiLine(long style)
     text = wxS("1234");
     m_text->SetValue(text);
     const long numChars_1 = 4;
-    wxASSERT( numChars_1 == text.Length() );
+    wxASSERT( numChars_1 == text.length() );
     XYPos coords_1[numChars_1+1] =
         { { 0, 0 }, { 1, 0 }, { 2, 0}, { 3, 0 }, { 4, 0 } };
 
@@ -852,7 +852,7 @@ void TextCtrlTestCase::DoPositionToXYMultiLine(long style)
 #endif // WXMSW
 
     const long numChars_2 = 8;
-    wxASSERT(numChars_2 == text.Length());
+    wxASSERT(numChars_2 == text.length());
     XYPos coords_2[numChars_2 + 1] =
         { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 },
           { 0, 1 }, { 1, 1 }, { 2, 1 },
@@ -901,7 +901,7 @@ void TextCtrlTestCase::DoPositionToXYMultiLine(long style)
 #endif // WXMSW
 
     const long numChars_3 = 3;
-    wxASSERT(numChars_3 == text.Length());
+    wxASSERT(numChars_3 == text.length());
     XYPos coords_3[numChars_3+1] =
         { { 0, 0 },
           { 0, 1 },
@@ -953,7 +953,7 @@ void TextCtrlTestCase::DoPositionToXYMultiLine(long style)
 #endif // WXMSW
 
     const long numChars_4 = 10;
-    wxASSERT(numChars_4 == text.Length());
+    wxASSERT(numChars_4 == text.length());
     XYPos coords_4[numChars_4+1] =
         { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 },
           { 0, 1 }, { 1, 1 },
@@ -1188,7 +1188,7 @@ void TextCtrlTestCase::PositionToXYSingleLine()
     // pure one line
     text = wxS("1234");
     m_text->SetValue(text);
-    const long numChars_1 = text.Length();
+    const long numChars_1 = text.length();
     CPPUNIT_ASSERT_EQUAL( numChars_1, m_text->GetLastPosition() );
     for ( long i = 0; i <= numChars_1; i++ )
     {
@@ -1204,7 +1204,7 @@ void TextCtrlTestCase::PositionToXYSingleLine()
     // with new line characters
     text = wxS("123\nab\nX");
     m_text->SetValue(text);
-    const long numChars_2 = text.Length();
+    const long numChars_2 = text.length();
     CPPUNIT_ASSERT_EQUAL( numChars_2, m_text->GetLastPosition() );
     for ( long i = 0; i <= numChars_2; i++ )
     {
