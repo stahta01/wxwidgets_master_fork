@@ -194,7 +194,7 @@ wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size)
     if (x <= max_size)
         return text;
 
-    size_t i, len = text.Length();
+    size_t i, len = text.length();
     size_t last_good_length = 0;
     for (i = 0; i < len; ++i)
     {
