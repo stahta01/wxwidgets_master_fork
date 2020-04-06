@@ -624,7 +624,7 @@ static wxString FileToCppArray(wxString filename, int num)
             output << wxT("\n");
         }
         output << tmp;
-        linelng += tmp.Length()+1;
+        linelng += tmp.length()+1;
     }
 
     delete[] buffer;
@@ -782,7 +782,7 @@ static wxString FileToPythonArray(wxString filename, int num)
             output << wxT("\\\n");
         }
         output << tmp;
-        linelng += tmp.Length();
+        linelng += tmp.length();
     }
 
     delete[] buffer;
