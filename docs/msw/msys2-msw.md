@@ -96,3 +96,15 @@ H.  Build and run the widgets static sample
 I.  Build all the rest of the static samples
 
         cd build-${MSYSTEM_CARCH}-msw-static/samples && make && cd ../..
+
+J.  Build all static test code
+
+        cd build-${MSYSTEM_CARCH}-msw-static/tests && make && cd ../..
+
+K.  Run the non GUI test program
+
+        cd build-${MSYSTEM_CARCH}-msw-static/tests && ./test.exe ; cd ../..
+
+L.  Run the GUI test program
+
+        cd build-${MSYSTEM_CARCH}-msw-static/tests && ./test_gui.exe ; cd ../..
